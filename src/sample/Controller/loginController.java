@@ -2,17 +2,16 @@ package sample.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class loginController {
 
@@ -35,32 +34,38 @@ public class loginController {
             errorLogin.setText("Login Geslaagd!");
             errorLogin.setTextFill(Color.GREEN);
 
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/homeScreen.fxml"));
-                Parent root1 = fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setTitle("Home");
-                stage.setScene(new Scene(root1));
-                stage.show();
-                ((Node)(event.getSource())).getScene().getWindow().hide();
-
-            }
-            catch (IOException e)
+            try
             {
-                e.getMessage();
+                String query = "select password from login where username=?";
+                PreparedStatement statement = DatabaseConnection.prepareStatement(query);
+                statement.setString(1, Username);
+                ResultSet result=statement.executeQuery();
+
+                if(result.next()){
+                    if( result.getString(1).equalsIgnoreCase(Password)){
+                        System.out.println("Logged In");
+
+                        new newScreenController().setScreen("../View/homeScreen.fxml");
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                    }
+                    else{
+                        System.out.println("Invalid Password");
+                    }
+                }
+                else{
+                    System.out.println("Invalid Username");
+                }
+            }
+            catch (SQLException sqlE)
+            {
+                sqlE.getMessage();
             }
         }
-        else if (Password.equals("") || Username.equals(""))
+        else
         {
             errorLogin.setText("Email and/or Password is wrong!");
         }
 
-        else
-        {
-            errorLogin.setText("Strange Error!");
-        }
 
         System.out.println(Username + Password);
     }

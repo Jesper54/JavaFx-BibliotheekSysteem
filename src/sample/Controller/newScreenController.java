@@ -1,12 +1,11 @@
 package sample.Controller;
 
-
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class newScreenController {
@@ -21,8 +20,6 @@ public class newScreenController {
             stage.setTitle("Home");
             stage.setScene(new Scene(root1));
             stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-
         }
         catch (IOException e)
         {
