@@ -17,9 +17,6 @@ public class Main extends Application {
         primaryStage.setTitle("Library System");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
-
-        String password = "admin";
-        System.out.println("Md5: " + PasswordEncryption.MD5(password));
     }
 
 

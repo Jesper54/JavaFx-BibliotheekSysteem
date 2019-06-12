@@ -8,10 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import sample.Asset.DatabaseConnection;
 import sample.Asset.PasswordEncryption;
-
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
