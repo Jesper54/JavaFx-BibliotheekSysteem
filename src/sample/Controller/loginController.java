@@ -3,6 +3,7 @@ package sample.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -37,14 +37,15 @@ public class loginController {
 
 
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homeScreen.fxml"));
-                Parent root1 = (Parent) fxmlLoader.load();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/homeScreen.fxml"));
+                Parent root1 = fxmlLoader.load();
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
-                stage.initStyle(StageStyle.UNDECORATED);
                 stage.setTitle("Home");
                 stage.setScene(new Scene(root1));
                 stage.show();
+                ((Node)(event.getSource())).getScene().getWindow().hide();
+
             }
             catch (IOException e)
             {
