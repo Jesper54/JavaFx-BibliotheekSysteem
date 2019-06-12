@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.Asset.DatabaseConnection;
+import sample.Asset.PasswordEncryption;
 
 public class Main extends Application {
 
@@ -16,6 +17,9 @@ public class Main extends Application {
         primaryStage.setTitle("Library System");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
+
+        String password = "admin";
+        System.out.println("Md5: " + PasswordEncryption.MD5(password));
     }
 
 

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar layoutY="2.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu fx:id="homeLogout" mnemonicParsing="false" text="Logout" />
-        </menus>
-      </MenuBar>
+      <TableView fx:id="homeTable" layoutX="193.0" layoutY="138.0" prefHeight="322.0" prefWidth="525.0">
+        <columns>
+          <TableColumn fx:id="homeTableId" prefWidth="94.0" text="Id" />
+          <TableColumn fx:id="homeTableName" prefWidth="106.0" text="Name" />
+            <TableColumn fx:id="homeTableItem" prefWidth="109.0" text="Item" />
+            <TableColumn fx:id="homeTableStock" prefWidth="106.0" text="Stock" />
+        </columns>
+      </TableView>
+      <TextField fx:id="homeInputSearch" layoutX="517.0" layoutY="113.0" />
+      <Button fx:id="homeSubmitSearch" layoutX="666.0" layoutY="113.0" mnemonicParsing="false" text="Search" />
+      <Label fx:id="homeWelcome" layoutX="26.0" layoutY="22.0" prefHeight="17.0" prefWidth="215.0" text="Welcome [User]">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

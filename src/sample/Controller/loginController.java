@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import sample.Asset.DatabaseConnection;
+import sample.Asset.PasswordEncryption;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -27,7 +28,7 @@ public class loginController {
     private Label errorLogin;
 
     @FXML
-    private void onclickLogin(ActionEvent event)
+    protected void onclickLogin(ActionEvent event)
     {
         String Email = loginEmail.getText();
         String Password = loginPassword.getText();
@@ -42,9 +43,7 @@ public class loginController {
 
                 if(result.next()){
 
-                    //HIER DE MD5 DECRYPTER MAKEN
-
-                    if( result.getString(1).equals(Password)){
+                    if( result.getString(1).equals(PasswordEncryption.MD5(Password))){
                         errorLogin.setText("Login Geslaagd!");
                         errorLogin.setTextFill(Color.GREEN);
 
