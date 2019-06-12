@@ -6,6 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import sample.Asset.DatabaseConnection;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +41,10 @@ public class loginController {
                 ResultSet result=statement.executeQuery();
 
                 if(result.next()){
-                    if( result.getString(1).equalsIgnoreCase(Password)){
+
+                    //HIER DE MD5 DECRYPTER MAKEN
+
+                    if( result.getString(1).equals(Password)){
                         errorLogin.setText("Login Geslaagd!");
                         errorLogin.setTextFill(Color.GREEN);
 

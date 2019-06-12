@@ -1,4 +1,4 @@
-package sample.Controller;
+package sample.Asset;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    protected static Connection conn = null;
+    public static Connection conn = null;
 
     public static void connection() {
         if (conn!=null) {
