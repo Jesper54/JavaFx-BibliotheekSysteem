@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.addUserController">
+   <children>
+      <Label layoutX="62.0" layoutY="59.0" text="Register new user">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="addUsername" layoutX="117.0" layoutY="169.0" />
+      <TextField fx:id="addPassword" layoutX="117.0" layoutY="218.0" />
+      <TextField fx:id="addEmail" layoutX="117.0" layoutY="270.0" />
+      <Label layoutX="117.0" layoutY="152.0" text="Username" />
+      <Label layoutX="117.0" layoutY="201.0" text="Password" />
+      <Label layoutX="117.0" layoutY="253.0" text="Email" />
+      <Label layoutX="119.0" layoutY="308.0" text="Role" />
+      <Button fx:id="registerNewUser" layoutX="116.0" layoutY="388.0" mnemonicParsing="false" onAction="#submitNewUser" text="Register" />
+      <Button fx:id="cancelNewUser" layoutX="184.0" layoutY="388.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Cancel" />
+      <ChoiceBox fx:id="roles" layoutX="116.0" layoutY="325.0" prefWidth="150.0" />
+   </children>
+</Pane>

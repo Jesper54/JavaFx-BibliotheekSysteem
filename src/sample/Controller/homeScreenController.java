@@ -3,57 +3,78 @@ package sample.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Asset.DatabaseConnection;
+import sample.Asset.Item;
 
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class homeScreenController {
     @FXML
     private Label homeWelcome;
-
     @FXML
     private TextField homeInputSearch;
+    @FXML
+    private TableView homeTable;
+    @FXML
+    private TableColumn col_id;
+    @FXML
+    private TableColumn col_name;
+    @FXML
+    private TableColumn col_description;
+    @FXML
+    private TableColumn col_category;
+    @FXML
+    private TableColumn col_stock;
+
+
 
     @FXML
-    private Button homeSubmitSearch;
-
-    @FXML
-    private TableColumn homeTableId;
-    private TableColumn homeTableName;
-    private TableColumn homeTableDescription;
-    private TableColumn homeTableCategory;
-    private TableColumn homeTableStock;
-
-    @FXML
-    public void initialize()
+    private void initialize()
     {
-        try
-        {
-            String query = "select * from items";
-            PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query);
+        try {
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM items");
 
-
-
+            while(rs.next()) {
+                homeTable.getItems().addAll(new Item(rs.getString("id"),
+                                                     rs.getString("name"),
+                                                     rs.getString("category"),
+                                                     rs.getString("description"),
+                                                     rs.getString("stock")));
+            }
+            col_id.setCellValueFactory(new PropertyValueFactory<Item, String>("Id"));
+            col_name.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
+            col_category.setCellValueFactory(new PropertyValueFactory<Item, String>("Category"));
+            col_description.setCellValueFactory(new PropertyValueFactory<Item, String>("Description"));
+            col_stock.setCellValueFactory(new PropertyValueFactory<Item, String>("Stock"));
         }
-        catch (Exception e)
+        catch (SQLException e)
         {
             e.getMessage();
         }
     }
 
     @FXML
-    protected void logoutSubmit(ActionEvent event)
+    private void logoutSubmit(ActionEvent event)
     {
         new newScreenController().setScreen("../View/loginScreen.fxml");
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    protected void searchSubmit(ActionEvent event)
+    private void addSubmit(ActionEvent event){
+        new newScreenController().setScreen("../View/addUserScreen.fxml");
+    }
+
+    @FXML
+    private void searchSubmit(ActionEvent event)
     {
         //ZOEK FUNCTIE MAKEN
         System.out.println(homeInputSearch.getText());

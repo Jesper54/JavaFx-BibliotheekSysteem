@@ -38,7 +38,6 @@ public class loginController {
                 ResultSet result=statement.executeQuery();
 
                 if(result.next()){
-
                     if( result.getString(1).equals(PasswordEncryption.MD5(Password))){
                         errorLogin.setText("Login Geslaagd!");
                         errorLogin.setTextFill(Color.GREEN);

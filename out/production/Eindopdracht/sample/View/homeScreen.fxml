@@ -9,11 +9,11 @@
    <children>
       <TableView fx:id="homeTable" layoutX="193.0" layoutY="138.0" prefHeight="322.0" prefWidth="525.0">
         <columns>
-          <TableColumn fx:id="homeTableId" prefWidth="45.0" text="Id" />
-          <TableColumn fx:id="homeTableName" prefWidth="107.0" text="Name" />
-            <TableColumn fx:id="homeTableDescription" prefWidth="204.0" text="Description" />
-            <TableColumn fx:id="homeTableCategory" prefWidth="107.0" text="Category" />
-            <TableColumn fx:id="homeTableStock" prefWidth="58.0" text="Stock" />
+          <TableColumn fx:id="col_id" prefWidth="45.0" text="Id" />
+          <TableColumn fx:id="col_name" prefWidth="107.0" text="Name" />
+            <TableColumn fx:id="col_description" prefWidth="204.0" text="Description" />
+            <TableColumn fx:id="col_category" prefWidth="107.0" text="Category" />
+            <TableColumn fx:id="col_stock" prefWidth="58.0" text="Stock" />
         </columns>
       </TableView>
       <TextField fx:id="homeInputSearch" layoutX="517.0" layoutY="113.0" />
@@ -24,5 +24,6 @@
          </font>
       </Label>
       <Button fx:id="homeLogout" layoutX="844.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutSubmit" text="Logout" />
+      <Button fx:id="addUser" layoutX="773.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add User" />
    </children>
 </Pane>
