@@ -40,7 +40,6 @@ public class addUserController {
     @FXML
     protected void cancelSubmit(ActionEvent event)
     {
-        new newScreenController().setScreen("../View/homeScreen.fxml");
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 

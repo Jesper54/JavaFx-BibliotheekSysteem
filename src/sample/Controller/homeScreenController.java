@@ -14,6 +14,8 @@ import sample.Asset.Item;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class homeScreenController {
     @FXML
@@ -27,6 +29,8 @@ public class homeScreenController {
     @FXML
     private TableColumn col_name;
     @FXML
+    private TableColumn col_author;
+    @FXML
     private TableColumn col_description;
     @FXML
     private TableColumn col_category;
@@ -38,6 +42,9 @@ public class homeScreenController {
     @FXML
     private void initialize()
     {
+
+
+
         try {
             Statement stmt = DatabaseConnection.conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM items");
@@ -45,12 +52,14 @@ public class homeScreenController {
             while(rs.next()) {
                 homeTable.getItems().addAll(new Item(rs.getString("id"),
                                                      rs.getString("name"),
+                                                     rs.getString("author"),
                                                      rs.getString("category"),
                                                      rs.getString("description"),
                                                      rs.getString("stock")));
             }
             col_id.setCellValueFactory(new PropertyValueFactory<Item, String>("Id"));
             col_name.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
+            col_author.setCellValueFactory(new PropertyValueFactory<Item, String>("Author"));
             col_category.setCellValueFactory(new PropertyValueFactory<Item, String>("Category"));
             col_description.setCellValueFactory(new PropertyValueFactory<Item, String>("Description"));
             col_stock.setCellValueFactory(new PropertyValueFactory<Item, String>("Stock"));
@@ -74,9 +83,46 @@ public class homeScreenController {
     }
 
     @FXML
+    private void overviewSubmit(ActionEvent event) {
+        homeTable.getItems().clear();
+        initialize();
+    }
+
+    @FXML //Zoek functie
     private void searchSubmit(ActionEvent event)
     {
-        //ZOEK FUNCTIE MAKEN
-        System.out.println(homeInputSearch.getText());
+        try
+        {
+            String search = homeInputSearch.getText();
+            homeTable.getItems().clear();
+
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE name LIKE '%"+ search +"%'  ");
+
+            while(rs.next()) {
+                homeTable.getItems().addAll(new Item(rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("author"),
+                        rs.getString("category"),
+                        rs.getString("description"),
+                        rs.getString("stock")));
+            }
+            col_id.setCellValueFactory(new PropertyValueFactory<Item, String>("Id"));
+            col_name.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
+            col_author.setCellValueFactory(new PropertyValueFactory<Item, String>("Author"));
+            col_category.setCellValueFactory(new PropertyValueFactory<Item, String>("Category"));
+            col_description.setCellValueFactory(new PropertyValueFactory<Item, String>("Description"));
+            col_stock.setCellValueFactory(new PropertyValueFactory<Item, String>("Stock"));
+        }
+        catch (SQLException sqle)
+        {
+            sqle.getMessage();
+        }
+    }
+
+    @FXML
+    private void addProductSubmit(ActionEvent event)
+    {
+        new newScreenController().setScreen("../View/addProductScreen.fxml");
     }
 }

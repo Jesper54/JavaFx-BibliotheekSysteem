@@ -6,13 +6,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.Asset.DatabaseConnection;
-import sample.Asset.PasswordEncryption;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        DatabaseConnection.connection();
+        try {
+            DatabaseConnection.connection();
+        }
+        catch (Exception e){
+            System.out.println("Database is not turned on!");
+        }
         Parent root = FXMLLoader.load(getClass().getResource("View/loginScreen.fxml"));
         primaryStage.setTitle("Library System");
         primaryStage.setScene(new Scene(root, 300, 275));

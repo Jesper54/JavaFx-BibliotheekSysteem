@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.addProductController">
+   <children>
+      <Label layoutX="49.0" layoutY="39.0" text="Create New Product">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="114.0" layoutY="79.0" text="Title" />
+      <TextField fx:id="createTitle" layoutX="115.0" layoutY="96.0" />
+      <Label layoutX="118.0" layoutY="129.0" text="Author" />
+      <TextField fx:id="createAuthor" layoutX="115.0" layoutY="146.0" />
+      <TextArea fx:id="createDescription" layoutX="115.0" layoutY="299.0" prefHeight="200.0" prefWidth="220.0" />
+      <Label layoutX="115.0" layoutY="282.0" text="Description" />
+      <ChoiceBox fx:id="createCategory" layoutX="114.0" layoutY="251.0" prefWidth="150.0" />
+      <Label layoutX="114.0" layoutY="234.0" text="Category" />
+      <Button fx:id="createProductSubmit" layoutX="113.0" layoutY="507.0" mnemonicParsing="false" onAction="#createSubmit" text="Create" />
+      <Button fx:id="cancelCreateProduct" layoutX="177.0" layoutY="507.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Cancel" />
+      <TextField fx:id="createStock" layoutX="115.0" layoutY="201.0" />
+      <Label layoutX="118.0" layoutY="184.0" text="Stock (Amount))" />
+   </children>
+</Pane>

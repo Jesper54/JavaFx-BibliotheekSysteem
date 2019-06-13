@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -7,23 +8,25 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.homeScreenController">
    <children>
-      <TableView fx:id="homeTable" layoutX="193.0" layoutY="138.0" prefHeight="322.0" prefWidth="525.0">
+      <TableView fx:id="homeTable" layoutY="162.0" prefHeight="435.0" prefWidth="910.0">
         <columns>
-          <TableColumn fx:id="col_id" prefWidth="45.0" text="Id" />
-          <TableColumn fx:id="col_name" prefWidth="107.0" text="Name" />
-            <TableColumn fx:id="col_description" prefWidth="204.0" text="Description" />
-            <TableColumn fx:id="col_category" prefWidth="107.0" text="Category" />
-            <TableColumn fx:id="col_stock" prefWidth="58.0" text="Stock" />
+          <TableColumn fx:id="col_id" prefWidth="20.0" text="Id" />
+          <TableColumn fx:id="col_name" prefWidth="258.0" text="Name" />
+            <TableColumn fx:id="col_author" prefWidth="124.0" text="Author" />
+            <TableColumn fx:id="col_description" prefWidth="387.0" text="Description" />
+            <TableColumn fx:id="col_category" prefWidth="69.0" text="Category" />
+            <TableColumn fx:id="col_stock" minWidth="0.0" prefWidth="51.0" text="Stock" />
         </columns>
       </TableView>
-      <TextField fx:id="homeInputSearch" layoutX="517.0" layoutY="113.0" />
-      <Button fx:id="homeSubmitSearch" layoutX="666.0" layoutY="113.0" mnemonicParsing="false" onAction="#searchSubmit" text="Search" />
+      <TextField fx:id="homeInputSearch" layoutX="695.0" layoutY="137.0" onAction="#searchSubmit" promptText="Search..." />
       <Label fx:id="homeWelcome" layoutX="26.0" layoutY="22.0" prefHeight="17.0" prefWidth="215.0" text="Welcome [User]">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Label>
       <Button fx:id="homeLogout" layoutX="844.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutSubmit" text="Logout" />
-      <Button fx:id="addUser" layoutX="773.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add User" />
+      <Button fx:id="addUser" layoutX="769.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add User" />
+      <Button fx:id="homeSubmitOverview" layoutX="844.0" layoutY="137.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Overview" />
+      <Button fx:id="addProduct" layoutX="674.0" layoutY="10.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Add Product" />
    </children>
 </Pane>
