@@ -25,8 +25,10 @@
          </font>
       </Label>
       <Button fx:id="homeLogout" layoutX="844.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutSubmit" text="Logout" />
-      <Button fx:id="addUser" layoutX="769.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add User" />
+      <Button fx:id="addUser" layoutX="748.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add Member" />
       <Button fx:id="homeSubmitOverview" layoutX="844.0" layoutY="137.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Overview" />
-      <Button fx:id="addProduct" layoutX="674.0" layoutY="10.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Add Product" />
+      <Button fx:id="addProduct" layoutX="654.0" layoutY="10.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Add Product" />
+      <Button fx:id="editProduct" layoutX="563.0" layoutY="10.0" mnemonicParsing="false" onAction="#editProductSubmit" text="Edit Product" />
+      <Button fx:id="deleteProduct" layoutX="455.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteProductSubmit" text="Delete Product" />
    </children>
 </Pane>

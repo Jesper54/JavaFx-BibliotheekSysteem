@@ -125,4 +125,16 @@ public class homeScreenController {
     {
         new newScreenController().setScreen("../View/addProductScreen.fxml");
     }
+
+    @FXML
+    private void editProductSubmit(ActionEvent event)
+    {
+        new newScreenController().setScreen("../View/editProductScreen.fxml");
+    }
+
+    @FXML
+    private void deleteProductSubmit(ActionEvent event)
+    {
+        new newScreenController().setScreen("../View/deleteProductScreen.fxml");
+    }
 }
