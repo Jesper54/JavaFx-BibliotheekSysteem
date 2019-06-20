@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import sample.Asset.DatabaseConnection;
 import sample.Asset.PasswordEncryption;
+import sample.Asset.User;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,16 +33,26 @@ public class loginController {
 
             try
             {
-                String query = "select password from users where email=?";
+                String query = "select * from users where email=?";
 
                 PreparedStatement statement = DatabaseConnection.conn.prepareStatement(query);
                 statement.setString(1, Email);
                 ResultSet result=statement.executeQuery();
-
                 if(result.next()){
-                    if( result.getString(1).equals(PasswordEncryption.MD5(Password))){
+                    if( result.getString(4).equals(PasswordEncryption.MD5(Password))){
                         errorLogin.setText("Login Geslaagd!");
                         errorLogin.setTextFill(Color.GREEN);
+
+                        if (result.getString(2).equals("admin")){
+                            User.setRole("admin");
+                            System.out.println("Role set to admin!");
+                        }
+                        else{
+                            User.setRole("member");
+                            System.out.println("Role set to member!");
+                        }
+
+                        User.setName(result.getString(3));
 
                         new newScreenController().setScreen("../View/homeScreen.fxml");
                         ((Node)(event.getSource())).getScene().getWindow().hide();
@@ -55,7 +67,8 @@ public class loginController {
             }
             catch (SQLException sqlE)
             {
-                sqlE.getMessage();
+                System.out.println(sqlE.getMessage());
+
             }
         }
     }

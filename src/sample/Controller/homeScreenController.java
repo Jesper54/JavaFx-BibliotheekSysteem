@@ -3,14 +3,13 @@ package sample.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Asset.DatabaseConnection;
 import sample.Asset.Item;
+import sample.Asset.User;
 
+import javax.management.relation.Role;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,11 +36,33 @@ public class homeScreenController {
     @FXML
     private TableColumn col_stock;
 
+    @FXML
+    private Button addUser;
+    @FXML
+    private Button addProduct;
+    @FXML
+    private Button editProduct;
+    @FXML
+    private Button deleteProduct;
+    @FXML
+    private Button homeRentProduct;
 
 
     @FXML
     private void initialize()
     {
+        String role = User.getRole();
+        if(role == "member"){
+            addUser.setVisible(false);
+            addProduct.setVisible(false);
+            editProduct.setVisible(false);
+            deleteProduct.setVisible(false);
+            homeRentProduct.setVisible(false);
+        }
+
+        homeWelcome.setText("Welcome " + User.getName());
+
+
 
 
 
