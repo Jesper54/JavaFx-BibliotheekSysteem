@@ -127,6 +127,7 @@ public class homeScreenController {
                         rs.getString("category"),
                         rs.getString("description"),
                         rs.getString("stock")));
+
             }
             col_id.setCellValueFactory(new PropertyValueFactory<Item, String>("Id"));
             col_name.setCellValueFactory(new PropertyValueFactory<Item, String>("Name"));
