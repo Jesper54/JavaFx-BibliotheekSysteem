@@ -9,12 +9,9 @@ import sample.Asset.DatabaseConnection;
 import sample.Asset.Item;
 import sample.Asset.User;
 
-import javax.management.relation.Role;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class homeScreenController {
     @FXML
@@ -49,7 +46,7 @@ public class homeScreenController {
 
 
     @FXML
-    private void initialize()
+    void initialize()
     {
         String role = User.getRole();
         if(role == "member"){
@@ -151,7 +148,18 @@ public class homeScreenController {
     @FXML
     private void editProductSubmit(ActionEvent event)
     {
-        new newScreenController().setScreen("../View/editProductScreen.fxml");
+        if (homeTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong");
+            alert.setContentText("Please select a table row!");
+            alert.showAndWait();
+        }
+        else
+        {
+            
+
+            new newScreenController().setScreen("../View/editProductScreen.fxml");
+        }
     }
 
     @FXML
