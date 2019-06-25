@@ -8,7 +8,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Asset.DatabaseConnection;
 import sample.Asset.Item;
 import sample.Asset.User;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +18,7 @@ public class homeScreenController {
     @FXML
     private TextField homeInputSearch;
     @FXML
-    private TableView homeTable;
+    private TableView<Item> homeTable;
     @FXML
     private TableColumn col_id;
     @FXML
@@ -32,6 +31,10 @@ public class homeScreenController {
     private TableColumn col_category;
     @FXML
     private TableColumn col_stock;
+    @FXML
+    private Tab AddMemberTab;
+    @FXML
+    private TabPane TabPane;
 
     @FXML
     private Button addUser;
@@ -44,6 +47,7 @@ public class homeScreenController {
     @FXML
     private Button homeRentProduct;
 
+    public static String ProductId;
 
     @FXML
     void initialize()
@@ -55,12 +59,10 @@ public class homeScreenController {
             editProduct.setVisible(false);
             deleteProduct.setVisible(false);
             homeRentProduct.setVisible(false);
+            AddMemberTab.isDisabled();
         }
 
         homeWelcome.setText("Welcome " + User.getName());
-
-
-
 
 
         try {
@@ -146,9 +148,29 @@ public class homeScreenController {
     }
 
     @FXML
-    private void editProductSubmit(ActionEvent event)
+    public void editProductSubmit(ActionEvent event)
     {
-        if (homeTable.getSelectionModel().getSelectedItem() == null) {
+        Item item = homeTable.getSelectionModel().getSelectedItem();
+
+        if (item == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong");
+            alert.setContentText("Please select a table row!");
+            alert.showAndWait();
+        }
+        else
+            {
+                ProductId = item.getId();
+                new newScreenController().setScreen("../View/editProductScreen.fxml");
+            }
+    }
+
+    @FXML
+    private void deleteProductSubmit(ActionEvent event)
+    {
+        Item item = homeTable.getSelectionModel().getSelectedItem();
+
+        if (item == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Something went wrong");
             alert.setContentText("Please select a table row!");
@@ -156,15 +178,31 @@ public class homeScreenController {
         }
         else
         {
-            
-
-            new newScreenController().setScreen("../View/editProductScreen.fxml");
+            try
+            {
+                ProductId = item.getId();
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("DELETE FROM items WHERE id = "+ ProductId + "");
+                homeTable.getItems().clear();
+                initialize();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     @FXML
-    private void deleteProductSubmit(ActionEvent event)
+    private void homeRentSubmit(ActionEvent event)
     {
-        new newScreenController().setScreen("../View/deleteProductScreen.fxml");
+
     }
+
+    @FXML
+    private void  homeHandSubmit(ActionEvent event)
+    {
+
+    }
+
+
 }

@@ -8,28 +8,50 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.homeScreenController">
    <children>
-      <TableView fx:id="homeTable" layoutY="162.0" prefHeight="435.0" prefWidth="910.0">
-        <columns>
-          <TableColumn fx:id="col_id" prefWidth="20.0" text="Id" />
-          <TableColumn fx:id="col_name" prefWidth="258.0" text="Name" />
-            <TableColumn fx:id="col_author" prefWidth="124.0" text="Author" />
-            <TableColumn fx:id="col_description" prefWidth="387.0" text="Description" />
-            <TableColumn fx:id="col_category" prefWidth="69.0" text="Category" />
-            <TableColumn fx:id="col_stock" minWidth="0.0" prefWidth="51.0" text="Stock" />
-        </columns>
-      </TableView>
-      <TextField fx:id="homeInputSearch" layoutX="695.0" layoutY="137.0" onAction="#searchSubmit" promptText="Search..." />
-      <Label fx:id="homeWelcome" layoutX="26.0" layoutY="22.0" prefHeight="17.0" prefWidth="215.0" text="Welcome [User]">
+      <Label fx:id="homeWelcome" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="215.0" text="Welcome [User]">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="homeLogout" layoutX="844.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutSubmit" text="Logout" />
-      <Button fx:id="addUser" layoutX="748.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add Member" />
-      <Button fx:id="homeSubmitOverview" layoutX="844.0" layoutY="137.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Overview" />
-      <Button fx:id="addProduct" layoutX="654.0" layoutY="10.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Add Product" />
-      <Button fx:id="editProduct" layoutX="563.0" layoutY="10.0" mnemonicParsing="false" onAction="#editProductSubmit" text="Edit Product" />
-      <Button fx:id="deleteProduct" layoutX="455.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteProductSubmit" text="Delete Product" />
-      <Button fx:id="homeRentProduct" layoutX="576.0" layoutY="137.0" mnemonicParsing="false" text="Rent Product" />
+      <Button fx:id="homeLogout" layoutX="827.0" layoutY="10.0" mnemonicParsing="false" onAction="#logoutSubmit" text="Uitloggen" />
+      <Button fx:id="addUser" layoutX="612.0" layoutY="10.0" mnemonicParsing="false" onAction="#addSubmit" text="Add Member" />
+      <TabPane fx:id="TabPane" layoutY="45.0" prefHeight="555.0" prefWidth="910.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Home">
+               <content>
+                  <Pane prefHeight="398.0" prefWidth="910.0">
+                     <children>
+                        <TableView fx:id="homeTable" layoutY="30.0" prefHeight="494.0" prefWidth="910.0">
+                          <columns>
+                            <TableColumn fx:id="col_id" prefWidth="20.0" text="Id" />
+                            <TableColumn fx:id="col_name" prefWidth="258.0" text="Name" />
+                              <TableColumn fx:id="col_author" prefWidth="124.0" text="Author" />
+                              <TableColumn fx:id="col_description" prefWidth="387.0" text="Description" />
+                              <TableColumn fx:id="col_category" prefWidth="69.0" text="Category" />
+                              <TableColumn fx:id="col_stock" minWidth="0.0" prefWidth="51.0" text="Stock" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="homeSubmitOverview" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Overzicht" />
+                        <TextField fx:id="homeInputSearch" layoutX="696.0" layoutY="2.0" onAction="#searchSubmit" promptText="Search..." />
+                        <Button fx:id="homeRentProduct" layoutX="588.0" layoutY="2.0" mnemonicParsing="false" onAction="#homeRentSubmit" text="Product Uitlenen" />
+                        <Button fx:id="deleteProduct" layoutY="2.0" mnemonicParsing="false" onAction="#deleteProductSubmit" text="Product Verwijderen" />
+                        <Button fx:id="addProduct" layoutX="124.0" layoutY="2.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Nieuw Product" />
+                        <Button fx:id="editProduct" layoutX="218.0" layoutY="2.0" mnemonicParsing="false" onAction="#editProductSubmit" text="Product Wijzigen" />
+                        <Button fx:id="homeProductHandIn" layoutX="478.0" layoutY="2.0" mnemonicParsing="false" onAction="#homeHandSubmit" text="Product Inleveren" />
+                     </children>
+                  </Pane>
+               </content>
+          </Tab>
+          <Tab fx:id="AddMemberTab" text="Lid Toevoegen">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="434.0" prefWidth="910.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </Pane>
