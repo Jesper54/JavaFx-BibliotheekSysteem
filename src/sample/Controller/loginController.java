@@ -45,6 +45,7 @@ public class loginController {
 
                         if (result.getString(2).equals("admin")){
                             User.setRole("admin");
+                            User.setId(result.getString(1));
                             System.out.println("Role set to admin!");
                         }
                         else{

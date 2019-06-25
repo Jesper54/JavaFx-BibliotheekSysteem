@@ -23,4 +23,24 @@ public class User {
 
     private static String role;
 
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        User.email = email;
+    }
+
+    private static String email;
+
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        User.id = id;
+    }
+
+    private static String id;
+
 }
