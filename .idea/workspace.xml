@@ -2,27 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/src/sample/Asset/Reserve.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/addUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/addUserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/deleteProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/editProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/editProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/homeScreenController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/Controller/homeScreenController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/addProductScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/addProductScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/addUserScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/addUserScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/deleteProductScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/editMemberScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/editMemberScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/editProductScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/editProductScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/homeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eindopdracht/sample/View/homeScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/addUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/addUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/deleteProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Controller/editProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/editProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Asset/Reserve.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Asset/Reserve.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controller/homeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller/homeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/View/addProductScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/addProductScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/View/addUserScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/addUserScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/View/deleteProductScreen.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/View/editMemberScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/editMemberScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/View/editProductScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/editProductScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/View/homeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/View/homeScreen.fxml" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -89,12 +72,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controller/homeScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="135" column="13" lean-forward="true" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
+            <state relative-caret-position="592">
+              <caret line="444" column="29" lean-forward="true" selection-start-line="444" selection-start-column="29" selection-end-line="444" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5190#5191#0" expanded="true" />
-                <element signature="e#5271#5272#0" expanded="true" />
+                <element signature="e#5895#5896#0" expanded="true" />
+                <element signature="e#5976#5977#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Asset/Reserve.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+              <folding>
+                <element signature="e#421#422#0" expanded="true" />
+                <element signature="e#446#447#0" expanded="true" />
+                <element signature="e#477#478#0" expanded="true" />
+                <element signature="e#504#505#0" expanded="true" />
+                <element signature="e#536#537#0" expanded="true" />
+                <element signature="e#564#565#0" expanded="true" />
+                <element signature="e#599#600#0" expanded="true" />
+                <element signature="e#630#631#0" expanded="true" />
+                <element signature="e#664#665#0" expanded="true" />
+                <element signature="e#694#695#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,6 +124,8 @@
       <find>add</find>
       <find>addsubmit</find>
       <find>addUserSubmit</find>
+      <find>homereserve</find>
+      <find>HomeReserveItem</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -167,7 +173,7 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="173" />
     <option name="y" value="-17" />
     <option name="width" value="1612" />
@@ -182,7 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,6 +239,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,9 +387,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.15724947" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.15884861" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.32995737" />
       <window_info id="Designer" order="3" />
@@ -392,7 +397,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17334779" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.17334779" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -474,16 +479,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#770#771#0" expanded="true" />
             <element signature="e#798#799#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller/newScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -572,10 +567,7 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/View/deleteProductScreen.fxml">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/View/deleteProductScreen.fxml" />
     <entry file="file://$PROJECT_DIR$/src/sample/View/editMemberScreen.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -584,31 +576,7 @@
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/View/homeScreen.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="16" column="83" lean-forward="true" selection-start-line="16" selection-start-column="83" selection-end-line="16" selection-end-column="83" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller/deleteProductController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller/loginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="919">
-          <caret line="74" column="5" lean-forward="true" selection-start-line="74" selection-start-column="5" selection-end-line="74" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller/deleteProductController.java" />
     <entry file="file://$PROJECT_DIR$/src/sample/Controller/editProductController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -617,16 +585,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3711#3712#0" expanded="true" />
             <element signature="e#3784#3785#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Controller/editMemberController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -656,21 +614,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller/newScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller/editMemberController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="65" lean-forward="true" selection-start-line="65" selection-end-line="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Controller/loginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="57" column="87" lean-forward="true" selection-start-line="57" selection-start-column="87" selection-end-line="57" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/View/homeScreen.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="66" column="116" selection-start-line="66" selection-start-column="105" selection-end-line="66" selection-end-column="116" />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Asset/Reserve.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        <state relative-caret-position="187">
+          <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+          <folding>
+            <element signature="e#421#422#0" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controller/homeScreenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="135" column="13" lean-forward="true" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
+        <state relative-caret-position="592">
+          <caret line="444" column="29" lean-forward="true" selection-start-line="444" selection-start-column="29" selection-end-line="444" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5190#5191#0" expanded="true" />
-            <element signature="e#5271#5272#0" expanded="true" />
+            <element signature="e#5895#5896#0" expanded="true" />
+            <element signature="e#5976#5977#0" expanded="true" />
           </folding>
         </state>
       </provider>

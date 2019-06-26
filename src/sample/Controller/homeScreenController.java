@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Asset.*;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,6 +45,8 @@ public class homeScreenController {
     private TableColumn MemberRole;
 
     @FXML
+    private TabPane TabPane;
+    @FXML
     private Tab AddMemberTab;
     @FXML
     private Tab ReserveTab;
@@ -70,6 +73,8 @@ public class homeScreenController {
     private TableColumn ReserveStock;
     @FXML
     private TableColumn ReserveUser;
+    @FXML
+    private TableColumn ReserveItemId;
 
 
     public static String ProductId;
@@ -77,6 +82,10 @@ public class homeScreenController {
     public static String UserId;
 
     public static String MemberUserId;
+
+    public static String ReserveProductId;
+
+    public static String ReserveProductItemId;
 
     @FXML
     void initialize()
@@ -89,9 +98,9 @@ public class homeScreenController {
             addProduct.setVisible(false);
             editProduct.setVisible(false);
             deleteProduct.setVisible(false);
-            AddMemberTab.setDisable(true);
-            ReserveTab.setDisable(true);
-            LendOutTab.setDisable(true);
+            TabPane.getTabs().remove(AddMemberTab);
+            TabPane.getTabs().remove(ReserveTab);
+            TabPane.getTabs().remove(LendOutTab);
         }
 
         homeWelcome.setText("Welcome " + User.getName());
@@ -118,8 +127,7 @@ public class homeScreenController {
             col_description.setCellValueFactory(new PropertyValueFactory<Item, String>("Description"));
             col_stock.setCellValueFactory(new PropertyValueFactory<Item, String>("Stock"));
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             e.getMessage();
         }
 
@@ -147,18 +155,20 @@ public class homeScreenController {
         //RESERVETABLE
         try {
             Statement stmt = DatabaseConnection.conn.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id");
+            ResultSet result = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id WHERE lend.status = 0");
             while (result.next()) {
                 ReserveTable.getItems().addAll(new Reserve(result.getString("id"),
+                        result.getString("item_id"),
                         result.getString("name"),
                         result.getString("stock"),
                         result.getString("username")
                         ));
             }
-            ReserveId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Id"));
-            ReserveTitle.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Name"));
-            ReserveUser.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Username"));
-            ReserveStock.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Stock"));
+           ReserveId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Id"));
+           ReserveItemId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Item_Id"));
+           ReserveTitle.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Name"));
+           ReserveStock.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Stock"));
+           ReserveUser.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Username"));
         }
         catch (SQLException e)
         {
@@ -290,12 +300,30 @@ public class homeScreenController {
             {
                 //RESERVEREN
                 ProductId = item.getId();
-                Statement stmt = DatabaseConnection.conn.createStatement();
-                stmt.executeUpdate("insert into lend (item_id,user_id,status)VALUES('" + ProductId + "','" + UserId + "','" + "0" + "')");
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Reserveren geslaagd!");
-                alert.setContentText("Loop naar de balie medewerker om uw product op te halen");
-                alert.showAndWait();
+
+                Integer checkStock = Integer.parseInt(item.getStock());
+
+                if(checkStock < 1)
+                {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Product niet op voorraad!");
+                    alert.setContentText("U kunt het product niet reserveren, wacht totdat het product weer op voorraad is!");
+                    alert.showAndWait();
+                }
+                else
+                {
+                    Statement stmt = DatabaseConnection.conn.createStatement();
+                    stmt.executeUpdate("insert into lend (item_id,user_id,status)VALUES('" + ProductId + "','" + UserId + "','" + "0" + "')");
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Reserveren geslaagd!");
+                    alert.setContentText("Loop naar de balie medewerker om uw product op te halen");
+                    alert.showAndWait();
+
+                    ReserveTable.getItems().clear();
+                    homeTable.getItems().clear();
+                    MemberTable.getItems().clear();
+                    initialize();
+                }
             }
             catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -353,6 +381,68 @@ public class homeScreenController {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText(member.getUsername() + " deleted!");
                 alert.showAndWait();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void ReserveDeleteSubmit(ActionEvent event){
+
+        Reserve reserve = ReserveTable.getSelectionModel().getSelectedItem();
+
+        if (reserve == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong");
+            alert.setContentText("Please select a table row!");
+            alert.showAndWait();
+        }
+        else
+        {
+            try
+            {
+                ReserveProductId = reserve.getId();
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("DELETE FROM lend WHERE id = "+ ReserveProductId + "");
+                ReserveTable.getItems().clear();
+                homeTable.getItems().clear();
+                MemberTable.getItems().clear();
+                initialize();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(reserve.getName() + " reservation deleted!");
+                alert.showAndWait();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void RentProduct(ActionEvent event){
+        Reserve reserve = ReserveTable.getSelectionModel().getSelectedItem();
+
+        if (reserve == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong");
+            alert.setContentText("Please select a table row!");
+            alert.showAndWait();
+        }
+        else
+        {
+            try
+            {
+                ReserveProductId = reserve.getId();
+                ReserveProductItemId = reserve.getItem_Id();
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("UPDATE lend, items SET lend.status = 1, lend.startdate = CURRENT_DATE, lend.enddate = CURRENT_DATE + INTERVAL 7 DAY, items.stock = items.stock - 1 WHERE lend.id = "+ ReserveProductId +" AND items.id = "+ ReserveProductItemId +"");
+                ReserveTable.getItems().clear();
+                homeTable.getItems().clear();
+                MemberTable.getItems().clear();
+                initialize();
             }
             catch (SQLException e) {
                 System.out.println(e.getMessage());

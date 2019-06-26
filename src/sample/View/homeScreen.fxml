@@ -64,16 +64,18 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="homeRentProduct" layoutY="2.0" mnemonicParsing="false" text="Product Uitlenen" />
+                        <Button fx:id="homeRentProduct" layoutY="2.0" mnemonicParsing="false" onAction="#RentProduct" text="Product Uitlenen" />
                         <TableView fx:id="ReserveTable" layoutY="30.0" prefHeight="496.0" prefWidth="910.0">
                           <columns>
-                            <TableColumn fx:id="ReserveId" prefWidth="62.0" text="Id" />
-                            <TableColumn fx:id="ReserveTitle" prefWidth="511.0" text="Title" />
-                              <TableColumn fx:id="ReserveStock" prefWidth="129.0" text="Stock" />
-                              <TableColumn fx:id="ReserveUser" prefWidth="207.0" text="Username" />
+                            <TableColumn fx:id="ReserveId" prefWidth="40.0" text="Id" />
+                              <TableColumn fx:id="ReserveItemId" prefWidth="81.0" text="Item_id" />
+                            <TableColumn fx:id="ReserveTitle" prefWidth="466.0" text="Title" />
+                              <TableColumn fx:id="ReserveStock" prefWidth="76.0" text="Stock" />
+                              <TableColumn fx:id="ReserveUser" prefWidth="246.0" text="Username" />
                           </columns>
                         </TableView>
                         <Button fx:id="RefreshReserve" layoutX="846.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Refresh" />
+                        <Button fx:id="ReserveDelete" layoutX="113.0" layoutY="2.0" mnemonicParsing="false" onAction="#ReserveDeleteSubmit" text="Reservering Verwijderen" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -81,7 +83,18 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="homeProductHandIn" mnemonicParsing="false" text="Product Inleveren" />
+                        <Button fx:id="homeProductHandIn" layoutY="2.0" mnemonicParsing="false" text="Product Inleveren" />
+                        <TableView layoutY="29.0" prefHeight="499.0" prefWidth="910.0">
+                          <columns>
+                            <TableColumn prefWidth="52.0" text="Id" />
+                            <TableColumn prefWidth="136.0" text="Title" />
+                              <TableColumn prefWidth="71.0" text="Stock" />
+                              <TableColumn prefWidth="202.0" text="Username" />
+                              <TableColumn prefWidth="191.0" text="Start Datum" />
+                              <TableColumn prefWidth="150.0" text="Inlever Datum" />
+                              <TableColumn prefWidth="106.0" text="Boete" />
+                          </columns>
+                        </TableView>
                      </children>
                   </Pane>
                </content>
