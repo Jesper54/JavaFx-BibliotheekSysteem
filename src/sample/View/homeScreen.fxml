@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.homeScreenController">
    <children>
@@ -47,14 +47,14 @@
                         <TableView fx:id="MemberTable" layoutY="31.0" prefHeight="492.0" prefWidth="910.0">
                           <columns>
                             <TableColumn fx:id="MemberId" prefWidth="47.0" text="Id" />
-                            <TableColumn fx:id="MemberRole" prefWidth="149.0" text="Rol" />
                               <TableColumn fx:id="MemberName" minWidth="2.0" prefWidth="374.0" text="Name" />
                               <TableColumn fx:id="MemberEmail" prefWidth="338.0" text="Email" />
+                            <TableColumn fx:id="MemberRole" prefWidth="149.0" text="Rol" />
                           </columns>
                         </TableView>
                         <Button fx:id="addUser" layoutX="98.0" layoutY="2.0" mnemonicParsing="false" onAction="#addUserSubmit" text="Add Member" />
                         <Button fx:id="EditUser" layoutX="6.0" layoutY="2.0" mnemonicParsing="false" onAction="#EditUserSubmit" text="Edit Member" />
-                        <Button fx:id="DeleteUser" layoutX="192.0" layoutY="2.0" mnemonicParsing="false" text="Delete Member" />
+                        <Button fx:id="DeleteUser" layoutX="192.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteUserSubmit" text="Delete Member" />
                         <Button fx:id="RefreshUser" layoutX="840.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Refresh" />
                       </children>
                   </Pane>
@@ -64,7 +64,16 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="homeRentProduct" mnemonicParsing="false" text="Product Uitlenen" />
+                        <Button fx:id="homeRentProduct" layoutY="2.0" mnemonicParsing="false" text="Product Uitlenen" />
+                        <TableView fx:id="ReserveTable" layoutY="30.0" prefHeight="496.0" prefWidth="910.0">
+                          <columns>
+                            <TableColumn fx:id="ReserveId" prefWidth="62.0" text="Id" />
+                            <TableColumn fx:id="ReserveTitle" prefWidth="511.0" text="Title" />
+                              <TableColumn fx:id="ReserveStock" prefWidth="129.0" text="Stock" />
+                              <TableColumn fx:id="ReserveUser" prefWidth="207.0" text="Username" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="RefreshReserve" layoutX="846.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Refresh" />
                      </children></AnchorPane>
               </content>
             </Tab>

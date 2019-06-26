@@ -79,8 +79,6 @@ public class editProductController {
                     Statement stmt = DatabaseConnection.conn.createStatement();
                     stmt.executeUpdate("UPDATE items SET name = "+ "'" + NewTitle + "'" +", author = "+ "'" + NewAuthor + "'" +", category = "+ "'" + NewCat + "'" +", description = "+ "'" + NewDesc + "'" +", stock = "+ "'" + NewStock + "'" +" WHERE id = "+ "'" + Id + "'" +" ");
 
-
-
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Success!");
                     alert.setHeaderText("Product Updated!");

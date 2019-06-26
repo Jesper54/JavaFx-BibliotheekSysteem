@@ -24,6 +24,6 @@
       <TextField fx:id="editStock" layoutX="84.0" layoutY="205.0" prefHeight="25.0" prefWidth="190.0" />
       <Label layoutX="84.0" layoutY="188.0" prefHeight="17.0" prefWidth="64.0" text="Stock" />
       <Button fx:id="SubmitEdit" layoutX="90.0" layoutY="506.0" mnemonicParsing="false" onAction="#SubmitEditNew" text="Edit" />
-      <Button fx:id="CancelEdit" layoutX="133.0" layoutY="506.0" mnemonicParsing="false" onAction="#CancelEditNew" text="Cancel" />
+      <Button fx:id="CancelEdit" layoutX="133.0" layoutY="506.0" mnemonicParsing="false" onAction="#CancelEditNew" text="Close" />
    </children>
 </Pane>

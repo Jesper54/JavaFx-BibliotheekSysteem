@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import sample.Asset.DatabaseConnection;
@@ -49,25 +50,24 @@ public class addUserController {
         String Password = PasswordEncryption.MD5(addPassword.getText());
         String Email = addEmail.getText();
         String Username = addUsername.getText();
+        String Role = roles.getValue().toString();
+
+        System.out.println(Role);
 
         try {
             if (Password.isEmpty() && Email.isEmpty() && Username.isEmpty() && roles.getValue() == "Select a role!") {
                 System.out.println("Please fill in every textfield!");
 
             } else {
-                if (roles.getValue() == "Admin") {
-                    int role_id = 1;
-
                     Statement stmt = DatabaseConnection.conn.createStatement();
-                    stmt.executeUpdate("insert into users (rol_id,username,password,email)VALUES('" + role_id + "','" + Username + "','" + Password + "','" + Email + "')");
-                } else {
-                    int role_id = 0;
+                    stmt.executeUpdate("insert into users (rol,username,password,email)VALUES('" + Role + "','" + Username + "','" + Password + "','" + Email + "')");
 
-                    Statement stmt = DatabaseConnection.conn.createStatement();
-                    stmt.executeUpdate("insert into users (rol_id,username,password,email)VALUES('" + role_id + "','" + Username + "','" + Password + "','" + Email + "')");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle(Role + "added!");
+                alert.setContentText(Username +" can login!");
+                alert.showAndWait();
                 }
             }
-        }
         catch (Exception e)
         {
             e.getMessage();

@@ -18,7 +18,7 @@
         <TextField fx:id="editEmail" layoutX="84.0" layoutY="169.0" prefHeight="25.0" prefWidth="190.0" />
         <Label layoutX="84.0" layoutY="152.0" prefHeight="17.0" prefWidth="64.0" text="Email" />
         <Button fx:id="SubmitEdit" layoutX="84.0" layoutY="285.0" mnemonicParsing="false" onAction="#SubmitEditUser" text="Edit" />
-        <Button fx:id="CancelEdit" layoutX="122.0" layoutY="285.0" mnemonicParsing="false" onAction="#CancelEditUser" text="Cancel" />
+        <Button fx:id="CancelEdit" layoutX="122.0" layoutY="285.0" mnemonicParsing="false" onAction="#CancelEditUser" text="Close" />
       <ChoiceBox fx:id="editUserRole" layoutX="84.0" layoutY="233.0" prefWidth="150.0" />
       <Label layoutX="84.0" layoutY="216.0" prefHeight="17.0" prefWidth="64.0" text="Role" />
     </children>

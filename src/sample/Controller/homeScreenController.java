@@ -5,10 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.Asset.DatabaseConnection;
-import sample.Asset.Item;
-import sample.Asset.Member;
-import sample.Asset.User;
+import sample.Asset.*;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,6 +60,18 @@ public class homeScreenController {
     @FXML
     private Button HomeRentProduct;
 
+    @FXML
+    private TableView<Reserve> ReserveTable;
+    @FXML
+    private TableColumn ReserveId;
+    @FXML
+    private TableColumn ReserveTitle;
+    @FXML
+    private TableColumn ReserveStock;
+    @FXML
+    private TableColumn ReserveUser;
+
+
     public static String ProductId;
 
     public static String UserId;
@@ -73,6 +83,7 @@ public class homeScreenController {
     {
         String role = User.getRole();
         System.out.println(role);
+
         if(role.equals("member")){
             addUser.setVisible(false);
             addProduct.setVisible(false);
@@ -132,6 +143,27 @@ public class homeScreenController {
         {
             e.getMessage();
         }
+
+        //RESERVETABLE
+        try {
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet result = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id");
+            while (result.next()) {
+                ReserveTable.getItems().addAll(new Reserve(result.getString("id"),
+                        result.getString("name"),
+                        result.getString("stock"),
+                        result.getString("username")
+                        ));
+            }
+            ReserveId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Id"));
+            ReserveTitle.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Name"));
+            ReserveUser.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Username"));
+            ReserveStock.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Stock"));
+        }
+        catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
@@ -148,6 +180,7 @@ public class homeScreenController {
 
     @FXML
     private void overviewSubmit(ActionEvent event) {
+        ReserveTable.getItems().clear();
         MemberTable.getItems().clear();
         homeTable.getItems().clear();
         initialize();
@@ -228,7 +261,9 @@ public class homeScreenController {
                 ProductId = item.getId();
                 Statement stmt = DatabaseConnection.conn.createStatement();
                 stmt.executeUpdate("DELETE FROM items WHERE id = "+ ProductId + "");
+                ReserveTable.getItems().clear();
                 homeTable.getItems().clear();
+                MemberTable.getItems().clear();
                 initialize();
             }
             catch (SQLException e) {
@@ -288,8 +323,40 @@ public class homeScreenController {
 
     @FXML
     private void RefreshUserSubmit(ActionEvent event){
+        ReserveTable.getItems().clear();
         MemberTable.getItems().clear();
         homeTable.getItems().clear();
         initialize();
+    }
+
+    @FXML
+    private void deleteUserSubmit(ActionEvent event){
+        Member member = MemberTable.getSelectionModel().getSelectedItem();
+
+        if (member == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Something went wrong");
+            alert.setContentText("Please select a table row!");
+            alert.showAndWait();
+        }
+        else
+        {
+            try
+            {
+                UserId = member.getId();
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("DELETE FROM users WHERE id = "+ UserId + "");
+                homeTable.getItems().clear();
+                MemberTable.getItems().clear();
+                initialize();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(member.getUsername() + " deleted!");
+                alert.showAndWait();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@
       <Label layoutX="117.0" layoutY="253.0" text="Email" />
       <Label layoutX="119.0" layoutY="308.0" text="Role" />
       <Button fx:id="registerNewUser" layoutX="116.0" layoutY="388.0" mnemonicParsing="false" onAction="#submitNewUser" text="Register" />
-      <Button fx:id="cancelNewUser" layoutX="184.0" layoutY="388.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Cancel" />
+      <Button fx:id="cancelNewUser" layoutX="184.0" layoutY="388.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Close" />
       <ChoiceBox fx:id="roles" layoutX="116.0" layoutY="325.0" prefWidth="150.0" />
    </children>
 </Pane>

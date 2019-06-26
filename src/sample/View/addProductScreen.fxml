@@ -23,7 +23,7 @@
       <ChoiceBox fx:id="createCategory" layoutX="114.0" layoutY="251.0" prefWidth="150.0" />
       <Label layoutX="114.0" layoutY="234.0" text="Category" />
       <Button fx:id="createProductSubmit" layoutX="113.0" layoutY="507.0" mnemonicParsing="false" onAction="#createSubmit" text="Create" />
-      <Button fx:id="cancelCreateProduct" layoutX="177.0" layoutY="507.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Cancel" />
+      <Button fx:id="cancelCreateProduct" layoutX="177.0" layoutY="507.0" mnemonicParsing="false" onAction="#cancelSubmit" text="Close" />
       <TextField fx:id="createStock" layoutX="115.0" layoutY="201.0" />
       <Label layoutX="118.0" layoutY="184.0" text="Stock (Amount))" />
    </children>
