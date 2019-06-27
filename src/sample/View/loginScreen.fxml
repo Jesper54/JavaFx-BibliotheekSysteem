@@ -12,13 +12,13 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.loginController">
    <children>
       <TextField fx:id="loginEmail" layoutX="76.0" layoutY="108.0" promptText="Email" />
-      <Text fx:id="libraryTitle" layoutX="96.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Library system">
+      <Text fx:id="libraryTitle" layoutX="75.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bibliotheek Systeem">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Text>
-      <PasswordField fx:id="loginPassword" layoutX="76.0" layoutY="150.0" promptText="Password" />
+      <PasswordField fx:id="loginPassword" layoutX="76.0" layoutY="150.0" promptText="Wachtwoord" />
       <Label fx:id="errorLogin" alignment="CENTER" layoutX="49.0" layoutY="33.0" prefHeight="17.0" prefWidth="203.0" textFill="#eb2222" />
-      <Button fx:id="submitLogin" layoutX="126.0" layoutY="222.0" mnemonicParsing="false" onAction="#onclickLogin" text="Login " />
+      <Button fx:id="submitLogin" layoutX="118.0" layoutY="207.0" mnemonicParsing="false" onAction="#onclickLogin" text="Inloggen" />
    </children>
 </Pane>

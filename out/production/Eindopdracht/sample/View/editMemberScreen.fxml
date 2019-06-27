@@ -9,17 +9,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.editMemberController">
     <children>
-        <Label layoutX="37.0" layoutY="33.0" text="Edit Member">
+        <Label layoutX="37.0" layoutY="33.0" text="Lid Bewerken">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font></Label>
         <TextField fx:id="editName" layoutX="84.0" layoutY="105.0" prefHeight="25.0" prefWidth="190.0" />
-        <Label layoutX="84.0" layoutY="88.0" text="Username" />
+        <Label layoutX="84.0" layoutY="88.0" text="Gebruikersnaam" />
         <TextField fx:id="editEmail" layoutX="84.0" layoutY="169.0" prefHeight="25.0" prefWidth="190.0" />
         <Label layoutX="84.0" layoutY="152.0" prefHeight="17.0" prefWidth="64.0" text="Email" />
-        <Button fx:id="SubmitEdit" layoutX="84.0" layoutY="285.0" mnemonicParsing="false" onAction="#SubmitEditUser" text="Edit" />
-        <Button fx:id="CancelEdit" layoutX="122.0" layoutY="285.0" mnemonicParsing="false" onAction="#CancelEditUser" text="Close" />
+        <Button fx:id="SubmitEdit" layoutX="84.0" layoutY="285.0" mnemonicParsing="false" onAction="#SubmitEditUser" text="Bewerken" />
+        <Button fx:id="CancelEdit" layoutX="157.0" layoutY="285.0" mnemonicParsing="false" onAction="#CancelEditUser" text="Sluiten" />
       <ChoiceBox fx:id="editUserRole" layoutX="84.0" layoutY="233.0" prefWidth="150.0" />
-      <Label layoutX="84.0" layoutY="216.0" prefHeight="17.0" prefWidth="64.0" text="Role" />
+      <Label layoutX="84.0" layoutY="216.0" prefHeight="17.0" prefWidth="64.0" text="Rol" />
     </children>
 </Pane>

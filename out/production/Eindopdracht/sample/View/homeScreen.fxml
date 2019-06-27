@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.homeScreenController">
    <children>
-      <Label fx:id="homeWelcome" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="215.0" text="Welcome [User]">
+      <Label fx:id="homeWelcome" layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="215.0" text="Welkom [User]">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
@@ -23,15 +23,15 @@
                         <TableView fx:id="homeTable" layoutY="30.0" prefHeight="494.0" prefWidth="910.0">
                           <columns>
                             <TableColumn fx:id="col_id" prefWidth="20.0" text="Id" />
-                            <TableColumn fx:id="col_name" prefWidth="258.0" text="Name" />
-                              <TableColumn fx:id="col_author" prefWidth="124.0" text="Author" />
-                              <TableColumn fx:id="col_description" prefWidth="387.0" text="Description" />
-                              <TableColumn fx:id="col_category" prefWidth="69.0" text="Category" />
-                              <TableColumn fx:id="col_stock" minWidth="0.0" prefWidth="51.0" text="Stock" />
+                            <TableColumn fx:id="col_name" prefWidth="258.0" text="Titel" />
+                              <TableColumn fx:id="col_author" prefWidth="124.0" text="Auteur" />
+                              <TableColumn fx:id="col_description" prefWidth="368.0" text="Beschrijving" />
+                              <TableColumn fx:id="col_category" prefWidth="74.0" text="Categorie" />
+                              <TableColumn fx:id="col_stock" minWidth="0.0" prefWidth="65.0" text="Voorraad" />
                           </columns>
                         </TableView>
-                        <Button fx:id="homeSubmitOverview" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Overzicht" />
-                        <TextField fx:id="homeInputSearch" layoutX="696.0" layoutY="2.0" onAction="#searchSubmit" promptText="Search..." />
+                        <Button fx:id="homeSubmitOverview" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#overviewSubmit" text="Herladen" />
+                        <TextField fx:id="homeInputSearch" layoutX="696.0" layoutY="2.0" onAction="#searchSubmit" promptText="Search Title....." />
                         <Button fx:id="deleteProduct" layoutY="2.0" mnemonicParsing="false" onAction="#deleteProductSubmit" text="Product Verwijderen" />
                         <Button fx:id="addProduct" layoutX="124.0" layoutY="2.0" mnemonicParsing="false" onAction="#addProductSubmit" text="Nieuw Product" />
                         <Button fx:id="editProduct" layoutX="218.0" layoutY="2.0" mnemonicParsing="false" onAction="#editProductSubmit" text="Product Wijzigen" />
@@ -47,15 +47,16 @@
                         <TableView fx:id="MemberTable" layoutY="31.0" prefHeight="492.0" prefWidth="910.0">
                           <columns>
                             <TableColumn fx:id="MemberId" prefWidth="47.0" text="Id" />
-                              <TableColumn fx:id="MemberName" minWidth="2.0" prefWidth="374.0" text="Name" />
+                              <TableColumn fx:id="MemberName" minWidth="2.0" prefWidth="374.0" text="Gebruikersnaam" />
                               <TableColumn fx:id="MemberEmail" prefWidth="338.0" text="Email" />
                             <TableColumn fx:id="MemberRole" prefWidth="149.0" text="Rol" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addUser" layoutX="98.0" layoutY="2.0" mnemonicParsing="false" onAction="#addUserSubmit" text="Add Member" />
-                        <Button fx:id="EditUser" layoutX="6.0" layoutY="2.0" mnemonicParsing="false" onAction="#EditUserSubmit" text="Edit Member" />
-                        <Button fx:id="DeleteUser" layoutX="192.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteUserSubmit" text="Delete Member" />
-                        <Button fx:id="RefreshUser" layoutX="840.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Refresh" />
+                        <Button fx:id="addUser" layoutX="86.0" layoutY="2.0" mnemonicParsing="false" onAction="#addUserSubmit" text="Lid Toevoegen" />
+                        <Button fx:id="EditUser" layoutY="2.0" mnemonicParsing="false" onAction="#EditUserSubmit" text="Lid Bewerken" />
+                        <Button fx:id="DeleteUser" layoutX="180.0" layoutY="2.0" mnemonicParsing="false" onAction="#deleteUserSubmit" text="Lid Verwijderen" />
+                        <Button fx:id="RefreshUser" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Herladen" />
+                        <TextField fx:id="MemberInputSearch" layoutX="696.0" layoutY="2.0" onAction="#MemberSearch" promptText="Search Username..." />
                       </children>
                   </Pane>
                </content>
@@ -69,13 +70,14 @@
                           <columns>
                             <TableColumn fx:id="ReserveId" prefWidth="40.0" text="Id" />
                               <TableColumn fx:id="ReserveItemId" prefWidth="81.0" text="Item_id" />
-                            <TableColumn fx:id="ReserveTitle" prefWidth="466.0" text="Title" />
-                              <TableColumn fx:id="ReserveStock" prefWidth="76.0" text="Stock" />
-                              <TableColumn fx:id="ReserveUser" prefWidth="246.0" text="Username" />
+                            <TableColumn fx:id="ReserveTitle" prefWidth="466.0" text="Titel" />
+                              <TableColumn fx:id="ReserveStock" prefWidth="76.0" text="Voorraad" />
+                              <TableColumn fx:id="ReserveUser" prefWidth="246.0" text="Gebruikersnaam" />
                           </columns>
                         </TableView>
-                        <Button fx:id="RefreshReserve" layoutX="846.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Refresh" />
-                        <Button fx:id="ReserveDelete" layoutX="113.0" layoutY="2.0" mnemonicParsing="false" onAction="#ReserveDeleteSubmit" text="Reservering Verwijderen" />
+                        <Button fx:id="RefreshReserve" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Herladen" />
+                        <Button fx:id="ReserveDelete" layoutX="105.0" layoutY="2.0" mnemonicParsing="false" onAction="#ReserveDeleteSubmit" text="Reservering Verwijderen" />
+                        <TextField fx:id="ReserveInputSearch" layoutX="696.0" layoutY="2.0" onAction="#ReserveSearch" promptText="Search Username..." />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -83,18 +85,21 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="homeProductHandIn" layoutY="2.0" mnemonicParsing="false" text="Product Inleveren" />
-                        <TableView layoutY="29.0" prefHeight="499.0" prefWidth="910.0">
+                        <Button fx:id="homeProductHandIn" layoutY="2.0" mnemonicParsing="false" onAction="#HandInProduct" text="Product Inleveren" />
+                        <TableView fx:id="LendTable" layoutY="29.0" prefHeight="499.0" prefWidth="910.0">
                           <columns>
-                            <TableColumn prefWidth="52.0" text="Id" />
-                            <TableColumn prefWidth="136.0" text="Title" />
-                              <TableColumn prefWidth="71.0" text="Stock" />
-                              <TableColumn prefWidth="202.0" text="Username" />
-                              <TableColumn prefWidth="191.0" text="Start Datum" />
-                              <TableColumn prefWidth="150.0" text="Inlever Datum" />
-                              <TableColumn prefWidth="106.0" text="Boete" />
+                            <TableColumn fx:id="LendId" prefWidth="21.0" text="Id" />
+                            <TableColumn fx:id="LendTitle" prefWidth="309.0" text="Titel" />
+                              <TableColumn fx:id="LendStock" prefWidth="63.0" text="Voorraad" />
+                              <TableColumn fx:id="LendUsername" prefWidth="211.0" text="Gebruikersnaam" />
+                              <TableColumn fx:id="LendStartDate" prefWidth="110.0" text="Start Datum" />
+                              <TableColumn fx:id="LendEndDate" prefWidth="101.0" text="Inlever Datum" />
+                              <TableColumn fx:id="LendFine" prefWidth="93.0" text="Boete" />
                           </columns>
                         </TableView>
+                        <TextField fx:id="LendInputSearch" layoutX="696.0" layoutY="2.0" onAction="#LendSearch" promptText="Search Username..." />
+                        <Button fx:id="RefreshReserve1" layoutX="845.0" layoutY="2.0" mnemonicParsing="false" onAction="#RefreshUserSubmit" text="Herladen" />
+                        <Button fx:id="homeProductHandIn1" layoutX="109.0" layoutY="2.0" mnemonicParsing="false" onAction="#DeleteHandInProduct" text="Uitgeleend product verwijderen" />
                      </children>
                   </Pane>
                </content>

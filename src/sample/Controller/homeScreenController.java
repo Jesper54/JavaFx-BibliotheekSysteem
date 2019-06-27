@@ -6,11 +6,16 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Asset.*;
-
-import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class homeScreenController {
     @FXML
@@ -61,7 +66,11 @@ public class homeScreenController {
     @FXML
     private Button deleteProduct;
     @FXML
-    private Button HomeRentProduct;
+    private TextField MemberInputSearch;
+    @FXML
+    private TextField ReserveInputSearch;
+    @FXML
+    private TextField LendInputSearch;
 
     @FXML
     private TableView<Reserve> ReserveTable;
@@ -76,6 +85,23 @@ public class homeScreenController {
     @FXML
     private TableColumn ReserveItemId;
 
+    @FXML
+    private TableView<Lend> LendTable;
+    @FXML
+    private TableColumn LendId;
+    @FXML
+    private TableColumn LendTitle;
+    @FXML
+    private TableColumn LendStock;
+    @FXML
+    private TableColumn LendUsername;
+    @FXML
+    private TableColumn LendStartDate;
+    @FXML
+    private TableColumn LendEndDate;
+    @FXML
+    private TableColumn LendFine;
+
 
     public static String ProductId;
 
@@ -86,6 +112,8 @@ public class homeScreenController {
     public static String ReserveProductId;
 
     public static String ReserveProductItemId;
+
+    public static String LendRemoveId;
 
     @FXML
     void initialize()
@@ -103,7 +131,7 @@ public class homeScreenController {
             TabPane.getTabs().remove(LendOutTab);
         }
 
-        homeWelcome.setText("Welcome " + User.getName());
+        homeWelcome.setText("Welkom " + User.getName());
 
         UserId = User.getId();
 
@@ -174,6 +202,62 @@ public class homeScreenController {
         {
             System.out.println(e.getMessage());
         }
+
+        //LENDTABLE
+        try{
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id WHERE lend.status = 1");
+            while (rs.next()) {
+
+                // Boete Berekenen via datum
+                SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String EndDate = rs.getString("enddate");
+                LocalDate localDate = LocalDate.now();
+                Date CurrentDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+                try {
+                    Date date1 = DateFormat.parse(EndDate);
+                    Date date2 = CurrentDate;
+                    long Difference = date2.getTime() - date1.getTime();
+                    long Converted = (TimeUnit.DAYS.convert(Difference, TimeUnit.MILLISECONDS));
+
+                    // Converten van long naar integer voor berekening
+                    String Converted1 = String.valueOf(Converted);
+                    Integer ConvertedDate = Integer.valueOf(Converted1);
+
+                    // Kijken of hij telaat is en hoeveel euro boete hij heeft
+                    if (ConvertedDate > 0){
+                        Integer Fine = ConvertedDate;
+                        Statement stmt1 = DatabaseConnection.conn.createStatement();
+                        stmt1.executeUpdate("UPDATE lend SET fine =  "+ "'" + "€"+ConvertedDate+",-" + "'" +" WHERE id = "+ rs.getString("id") +" ");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
+                LendTable.getItems().addAll(new Lend(rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("stock"),
+                        rs.getString("username"),
+                        rs.getString("startdate"),
+                        rs.getString("enddate"),
+                        rs.getString("fine")
+                        ));
+            }
+            LendId.setCellValueFactory(new PropertyValueFactory<Lend, String>("Id"));
+            LendTitle.setCellValueFactory(new  PropertyValueFactory<Lend, String>("Name"));
+            LendStock.setCellValueFactory(new PropertyValueFactory<Lend, String>("Stock"));
+            LendUsername.setCellValueFactory(new PropertyValueFactory<Lend, String>("Username"));
+            LendStartDate.setCellValueFactory(new PropertyValueFactory<Lend, String>("StartDate"));
+            LendEndDate.setCellValueFactory(new PropertyValueFactory<Lend, String>("EndDate"));
+            LendFine.setCellValueFactory(new PropertyValueFactory<Lend, String>("Fine"));
+
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @FXML
@@ -190,6 +274,7 @@ public class homeScreenController {
 
     @FXML
     private void overviewSubmit(ActionEvent event) {
+        LendTable.getItems().clear();
         ReserveTable.getItems().clear();
         MemberTable.getItems().clear();
         homeTable.getItems().clear();
@@ -242,8 +327,9 @@ public class homeScreenController {
 
         if (item == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -260,8 +346,9 @@ public class homeScreenController {
 
         if (item == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -271,10 +358,20 @@ public class homeScreenController {
                 ProductId = item.getId();
                 Statement stmt = DatabaseConnection.conn.createStatement();
                 stmt.executeUpdate("DELETE FROM items WHERE id = "+ ProductId + "");
+                Statement stmt2 = DatabaseConnection.conn.createStatement();
+                stmt2.executeUpdate("DELETE FROM lend WHERE item_id = "+ ProductId + "");
+
+                LendTable.getItems().clear();
                 ReserveTable.getItems().clear();
                 homeTable.getItems().clear();
                 MemberTable.getItems().clear();
                 initialize();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Gelukt!");
+                alert.setHeaderText("Product verwijderd");
+                alert.setContentText("Artikel: "+ item.getName());
+                alert.showAndWait();
             }
             catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -290,8 +387,9 @@ public class homeScreenController {
 
         if (item == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -306,6 +404,7 @@ public class homeScreenController {
                 if(checkStock < 1)
                 {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Niet gelukt!");
                     alert.setTitle("Product niet op voorraad!");
                     alert.setContentText("U kunt het product niet reserveren, wacht totdat het product weer op voorraad is!");
                     alert.showAndWait();
@@ -315,10 +414,12 @@ public class homeScreenController {
                     Statement stmt = DatabaseConnection.conn.createStatement();
                     stmt.executeUpdate("insert into lend (item_id,user_id,status)VALUES('" + ProductId + "','" + UserId + "','" + "0" + "')");
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    alert.setTitle("Reserveren geslaagd!");
+                    alert.setTitle("Gelukt!");
+                    alert.setHeaderText("Reserveren geslaagd!");
                     alert.setContentText("Loop naar de balie medewerker om uw product op te halen");
                     alert.showAndWait();
 
+                    LendTable.getItems().clear();
                     ReserveTable.getItems().clear();
                     homeTable.getItems().clear();
                     MemberTable.getItems().clear();
@@ -338,8 +439,9 @@ public class homeScreenController {
 
         if (member == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -351,6 +453,7 @@ public class homeScreenController {
 
     @FXML
     private void RefreshUserSubmit(ActionEvent event){
+        LendTable.getItems().clear();
         ReserveTable.getItems().clear();
         MemberTable.getItems().clear();
         homeTable.getItems().clear();
@@ -363,8 +466,9 @@ public class homeScreenController {
 
         if (member == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -374,12 +478,15 @@ public class homeScreenController {
                 UserId = member.getId();
                 Statement stmt = DatabaseConnection.conn.createStatement();
                 stmt.executeUpdate("DELETE FROM users WHERE id = "+ UserId + "");
+                LendTable.getItems().clear();
+                ReserveTable.getItems().clear();
                 homeTable.getItems().clear();
                 MemberTable.getItems().clear();
                 initialize();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText(member.getUsername() + " deleted!");
+                alert.setTitle("Gelukt!");
+                alert.setHeaderText(member.getUsername() + " deleted!");
                 alert.showAndWait();
             }
             catch (SQLException e) {
@@ -395,8 +502,9 @@ public class homeScreenController {
 
         if (reserve == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -406,13 +514,15 @@ public class homeScreenController {
                 ReserveProductId = reserve.getId();
                 Statement stmt = DatabaseConnection.conn.createStatement();
                 stmt.executeUpdate("DELETE FROM lend WHERE id = "+ ReserveProductId + "");
+                LendTable.getItems().clear();
                 ReserveTable.getItems().clear();
                 homeTable.getItems().clear();
                 MemberTable.getItems().clear();
                 initialize();
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText(reserve.getName() + " reservation deleted!");
+                alert.setTitle("Gelukt");
+                alert.setHeaderText(reserve.getName() + " reservering verwijderd!");
                 alert.showAndWait();
             }
             catch (SQLException e) {
@@ -427,8 +537,9 @@ public class homeScreenController {
 
         if (reserve == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Something went wrong");
-            alert.setContentText("Please select a table row!");
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
             alert.showAndWait();
         }
         else
@@ -438,11 +549,200 @@ public class homeScreenController {
                 ReserveProductId = reserve.getId();
                 ReserveProductItemId = reserve.getItem_Id();
                 Statement stmt = DatabaseConnection.conn.createStatement();
-                stmt.executeUpdate("UPDATE lend, items SET lend.status = 1, lend.startdate = CURRENT_DATE, lend.enddate = CURRENT_DATE + INTERVAL 7 DAY, items.stock = items.stock - 1 WHERE lend.id = "+ ReserveProductId +" AND items.id = "+ ReserveProductItemId +"");
+                stmt.executeUpdate("UPDATE lend, items SET lend.status = 1, lend.startdate = CURRENT_DATE, lend.enddate = CURRENT_DATE + INTERVAL 7 DAY, items.stock = items.stock -1 WHERE lend.id = "+ ReserveProductId +" AND items.id = "+ ReserveProductItemId +"");
+                LendTable.getItems().clear();
                 ReserveTable.getItems().clear();
                 homeTable.getItems().clear();
                 MemberTable.getItems().clear();
                 initialize();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Gelukt!");
+                alert.setHeaderText("Product Uitgeleend");
+                alert.setHeaderText(reserve.getName()+ " is uitgeleend");
+                alert.setContentText("");
+                alert.showAndWait();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void HandInProduct(ActionEvent event){
+        Lend lend = LendTable.getSelectionModel().getSelectedItem();
+
+        if (lend == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
+            alert.showAndWait();
+        }
+        else
+        {
+            try
+            {
+                String Fine = lend.getFine();
+
+                LendRemoveId = lend.getId();
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("DELETE FROM lend WHERE id = "+ LendRemoveId +"");
+                Statement stmt1 = DatabaseConnection.conn.createStatement();
+                stmt1.executeUpdate("UPDATE items SET stock = stock + 1");
+                LendTable.getItems().clear();
+                ReserveTable.getItems().clear();
+                homeTable.getItems().clear();
+                MemberTable.getItems().clear();
+                initialize();
+
+                if(Fine.equals("Geen Boete")) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Product Ingeleverd");
+                    alert.setHeaderText("Product succesvol terug gebracht");
+                    alert.setContentText("Artikel: " + lend.getName());
+                    alert.showAndWait();
+                }
+                else
+                {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Product Ingeleverd");
+                    alert.setHeaderText("Product succesvol terug gebracht");
+                    alert.setContentText(lend.getUsername() + " moet nog een boete betalen! "+lend.getFine() +"\nArtikel: " + lend.getName());
+                    alert.showAndWait();
+                }
+            }
+            catch (SQLException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
+    private void MemberSearch(ActionEvent event)
+    {
+        try
+        {
+            String search = MemberInputSearch.getText();
+            MemberTable.getItems().clear();
+
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username LIKE '%"+ search +"%'  ");
+
+            while(rs.next()) {
+                MemberTable.getItems().addAll(new Member(rs.getString("id"),
+                        rs.getString("rol"),
+                        rs.getString("username"),
+                        rs.getString("email")));
+            }
+            MemberId.setCellValueFactory(new PropertyValueFactory<Member, String>("Id"));
+            MemberRole.setCellValueFactory(new PropertyValueFactory<Member, String>("Rol"));
+            MemberName.setCellValueFactory(new PropertyValueFactory<Member, String>("Username"));
+            MemberEmail.setCellValueFactory(new PropertyValueFactory<Member, String>("Email"));
+        }
+        catch (SQLException sqle)
+        {
+            sqle.getMessage();
+        }
+    }
+
+    @FXML
+    private void ReserveSearch(ActionEvent event)
+    {
+        try
+        {
+            String search = ReserveInputSearch.getText();
+            ReserveTable.getItems().clear();
+
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id WHERE lend.status = 0 AND users.username LIKE '%"+ search +"%'  ");
+
+            while (rs.next()) {
+                ReserveTable.getItems().addAll(new Reserve(rs.getString("id"),
+                        rs.getString("item_id"),
+                        rs.getString("name"),
+                        rs.getString("stock"),
+                        rs.getString("username")
+                ));
+            }
+            ReserveId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Id"));
+            ReserveItemId.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Item_Id"));
+            ReserveTitle.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Name"));
+            ReserveStock.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Stock"));
+            ReserveUser.setCellValueFactory(new PropertyValueFactory<Reserve, String>("Username"));
+        }
+        catch (SQLException sqle)
+        {
+            sqle.getMessage();
+        }
+    }
+
+    @FXML
+    private void LendSearch(ActionEvent event)
+    {
+        try {
+            String search = LendInputSearch.getText();
+            LendTable.getItems().clear();
+
+            Statement stmt = DatabaseConnection.conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * from lend INNER JOIN items ON lend.item_id = items.id INNER JOIN users ON lend.user_id = users.id WHERE lend.status = 1 AND users.username LIKE '%" + search + "%'  ");
+
+            while(rs.next()) {
+                LendTable.getItems().addAll(new Lend(rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("stock"),
+                        rs.getString("username"),
+                        rs.getString("startdate"),
+                        rs.getString("enddate"),
+                        rs.getString("fine")
+                ));
+            }
+            LendId.setCellValueFactory(new PropertyValueFactory<Lend, String>("Id"));
+            LendTitle.setCellValueFactory(new  PropertyValueFactory<Lend, String>("Name"));
+            LendStock.setCellValueFactory(new PropertyValueFactory<Lend, String>("Stock"));
+            LendUsername.setCellValueFactory(new PropertyValueFactory<Lend, String>("Username"));
+            LendStartDate.setCellValueFactory(new PropertyValueFactory<Lend, String>("StartDate"));
+            LendEndDate.setCellValueFactory(new PropertyValueFactory<Lend, String>("EndDate"));
+            LendFine.setCellValueFactory(new PropertyValueFactory<Lend, String>("Fine"));
+        }
+        catch (SQLException sqle)
+        {
+            sqle.getMessage();
+        }
+    }
+
+    @FXML
+    private void DeleteHandInProduct(ActionEvent even)
+    {
+        Lend lend = LendTable.getSelectionModel().getSelectedItem();
+        LendRemoveId = lend.getId();
+        if (lend == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Geen rij");
+            alert.setHeaderText("Geen rij gevonden");
+            alert.setContentText("Selecteer een rij!");
+            alert.showAndWait();
+        }
+        else
+        {
+            try
+            {
+
+                Statement stmt = DatabaseConnection.conn.createStatement();
+                stmt.executeUpdate("DELETE FROM lend WHERE id = "+ LendRemoveId +"");
+                LendTable.getItems().clear();
+                ReserveTable.getItems().clear();
+                homeTable.getItems().clear();
+                MemberTable.getItems().clear();
+                initialize();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Gelukt!");
+                alert.setHeaderText("Product Verwijderd");
+                alert.setContentText("Dit product is verwijderd omdat het kapot is\nof omdat hij niet meer is ingeleverd.");
+                alert.showAndWait();
             }
             catch (SQLException e) {
                 System.out.println(e.getMessage());

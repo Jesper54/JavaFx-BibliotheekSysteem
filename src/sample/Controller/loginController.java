@@ -51,6 +51,7 @@ public class loginController {
                         else{
                             User.setRole("member");
                             System.out.println("Role set to member!");
+                            User.setId(result.getString(1));
                         }
 
                         User.setName(result.getString(3));
